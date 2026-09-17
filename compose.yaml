@@ -1,0 +1,28 @@
+services:
+  app:
+    image: digital-hill
+    env_file:
+      - .env
+    ports:
+      - "8050:8050"
+    volumes:
+      - .:/digital-hill
+    networks:
+      - dbnetwork
+
+  neo4j:
+    image: neo4j:2026.07.1-community-trixie
+    ports:
+      - "7474:7474"
+    volumes:
+      - neo4jdata:/data
+    env_file:
+      - .env
+    networks:
+      - dbnetwork
+
+volumes:
+  neo4jdata:
+
+networks:
+  dbnetwork:
